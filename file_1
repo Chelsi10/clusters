@@ -10,8 +10,10 @@ coord_filename = temp_filename[:len(temp_filename)-1]       # string slicing : t
 f = open('/home/csabu/PROJECT_IITKGP/Coordinates/' + coord_filename, 'r')
 lines = f.readlines()
 f.close()
-tot_atoms = int(lines[0])
-length = len(lines) - 2
+tot_atoms = int(lines[0])                                  # total no. of atoms as mentioned in the first line of
+                                                           # coordinate file
+length = len(lines) - 2                                    # calculating total no. of atoms by counting                        
+                                                           # the no. of lines corresponding to atom's coordinate  
 #CHECKING COORDINATE FILE
 if tot_atoms != length:                                    # if the no. of atoms in 1st line of file is not equal to
     print('****ERROR WHILE ENTERING COORDINATES****')      # the no. of coordinates given
