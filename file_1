@@ -1,0 +1,89 @@
+import os
+import sys
+#MONOMER
+line_no = 2                        # line no. of coordinate file
+file_no = 1                        # numbering for the new files for monomers
+h = open('/home/csabu/PROJECT_IITKGP/Coordinates/entry.txt','r')      #user will have to name the file entry.txt
+l = h.readlines()                  #list containing lines of entry.txt
+temp_filename = l[len(l)-1]                                 # at present name of the file includes last character \n
+coord_filename = temp_filename[:len(temp_filename)-1]       # string slicing : to remove \n
+f = open('/home/csabu/PROJECT_IITKGP/Coordinates/' + coord_filename, 'r')
+lines = f.readlines()
+f.close()
+tot_atoms = int(lines[0])
+length = len(lines) - 2
+#CHECKING COORDINATE FILE
+if tot_atoms != length:                                    # if the no. of atoms in 1st line of file is not equal to
+    print('****ERROR WHILE ENTERING COORDINATES****')      # the no. of coordinates given
+    sys.exit()                                             # code execution stops
+h.close()
+n = int(l[0])                      # no.of fragments
+os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B1')
+for i in range(1,n+1):
+    n_atoms = int(l[i])            # no. of atoms in a fragment
+    x = line_no
+    name = str(file_no) + '.txt'
+    g = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name, 'w+')
+    g.close()
+    for j in range(x,x+n_atoms):
+        f = open('/home/csabu/PROJECT_IITKGP/Coordinates/' + coord_filename,'r')
+        lines = f.readlines()
+        f.close()
+        g = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name, 'a')
+        g.write(lines[j])
+        g.close()
+        line_no = j + 1
+
+    file_no+=1
+
+#DIMERS
+os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B2')
+for p in range(1,n+1):
+    for q in range(p+1,n+1):
+        file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(p)+'.txt'
+        file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(q)+'.txt'
+        filenames = [file_1, file_2]
+        with open( '/home/csabu/PycharmProjects/clusters/PythonProjects/B2/'+ str(p)+str(q)+'.txt', 'w') as outfile:
+            for fname in filenames:
+                with open(fname) as infile:
+                    outfile.write(infile.read())
+                infile.close()
+        outfile.close()
+
+#TRIMERS
+if n<=2:                                               # if the cluster contains only 2 fragments
+    sys.exit()                                         # code execution stops
+os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B3')
+for i in range (1,n+1):
+    for j in range (i+1,n+1):
+        for k in range (j+1,n+1):
+            file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(i) + '.txt'
+            file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(j) + '.txt'
+            file_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(k) + '.txt'
+            filenames = [file_1, file_2, file_3]
+            with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + str(i) + str(j) + str(k) + '.txt', 'w') as outfile:
+                for fname in filenames:
+                    with open(fname) as infile:
+                        outfile.write(infile.read())
+                    infile.close()
+            outfile.close()
+
+#TETRAMERS
+if n<=3:                                              # if the cluster contains only 3 fragments
+    sys.exit()                                        # code execution stops
+os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B4')
+for p in range(1,n+1):
+    for q in range(p+1,n+1):
+        for r in range(q+1,n+1):
+            for s in range(r+1,n+1):
+                file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(p) + '.txt'
+                file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(q) + '.txt'
+                file_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(r) + '.txt'
+                file_4 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(s) + '.txt'
+                filenames = [file_1, file_2, file_3, file_4]
+                with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + str(p) + str(q) + str(r) + str(s) + '.txt', 'w') as outfile:
+                    for fname in filenames:
+                        with open(fname) as infile:
+                            outfile.write(infile.read())
+                        infile.close()
+                outfile.close()
