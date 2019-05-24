@@ -25,15 +25,14 @@ for i in range(1,n+1):
     n_atoms = int(l[i])            # no. of atoms in a fragment
     x = line_no
     name = str(file_no) + '.xyz'
-    g = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name, 'w+')
-    #g.write(l[i])
-    #g.write('\n')
+    TEMP = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/'
+    g = open(TEMP + name, 'w+')
     g.close()
     for j in range(x,x+n_atoms):
         f = open('/home/csabu/PROJECT_IITKGP/Coordinates/' + coord_filename,'r')
         lines = f.readlines()
         f.close()
-        g = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name, 'a')
+        g = open(TEMP + name, 'a')
         g.write(lines[j])
         g.close()
         line_no = j + 1
@@ -44,8 +43,8 @@ for i in range(1,n+1):
 os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B2')
 for p in range(1,n+1):
     for q in range(p+1,n+1):
-        file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(p)+'.xyz'
-        file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(q)+'.xyz'
+        file_1 = TEMP + str(p)+'.xyz'
+        file_2 = TEMP + str(q)+'.xyz'
         filenames = [file_1, file_2]
         with open( '/home/csabu/PycharmProjects/clusters/PythonProjects/B2/'+ str(p)+str(q)+'.xyz', 'w') as outfile:
             for fname in filenames:
@@ -54,150 +53,146 @@ for p in range(1,n+1):
                 infile.close()
         outfile.close()
 
+
 #TRIMERS
-if n<=2:                                               # if the cluster contains only 2 fragments
-    sys.exit()                                         # code execution stops
-os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B3')
-for i in range (1,n+1):
-    for j in range (i+1,n+1):
-        for k in range (j+1,n+1):
-            file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(i) + '.xyz'
-            file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(j) + '.xyz'
-            file_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(k) + '.xyz'
-            filenames = [file_1, file_2, file_3]
-            with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + str(i) + str(j) + str(k) + '.xyz', 'w') as outfile:
-                for fname in filenames:
-                    with open(fname) as infile:
-                        outfile.write(infile.read())
-                    infile.close()
-            outfile.close()
-#print('#####')
-#TETRAMERS
-if n<=3:                                              # if the cluster contains only 3 fragments
-    sys.exit()                                        # code execution stops
-os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B4')
-for p in range(1,n+1):
-    for q in range(p+1,n+1):
-        for r in range(q+1,n+1):
-            for s in range(r+1,n+1):
-                file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(p) + '.xyz'
-                file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(q) + '.xyz'
-                file_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(r) + '.xyz'
-                file_4 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(s) + '.xyz'
-                filenames = [file_1, file_2, file_3, file_4]
-                with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + str(p) + str(q) + str(r) + str(s) + '.xyz', 'w') as outfile:
+if n>=3:
+    os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B3')
+    for i in range (1,n+1):
+        for j in range (i+1,n+1):
+            for k in range (j+1,n+1):
+                file_1 = TEMP + str(i) + '.xyz'
+                file_2 = TEMP + str(j) + '.xyz'
+                file_3 = TEMP + str(k) + '.xyz'
+                filenames = [file_1, file_2, file_3]
+                with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + str(i) + str(j) + str(k) + '.xyz', 'w') as outfile:
                     for fname in filenames:
                         with open(fname) as infile:
-                            outfile.write(infile.read())
+                             outfile.write(infile.read())
                         infile.close()
                 outfile.close()
-#print('######')
-# formatting TETRAMERS
+
+#TETRAMERS
+if n>=4:
+    os.mkdir('/home/csabu/PycharmProjects/clusters/PythonProjects/B4')
+    for p in range(1,n+1):
+        for q in range(p+1,n+1):
+            for r in range(q+1,n+1):
+                for s in range(r+1,n+1):
+                    file_1 = TEMP + str(p) + '.xyz'
+                    file_2 = TEMP + str(q) + '.xyz'
+                    file_3 = TEMP + str(r) + '.xyz'
+                    file_4 = TEMP + str(s) + '.xyz'
+                    filenames = [file_1, file_2, file_3, file_4]
+                    with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + str(p) + str(q) + str(r) + str(s) + '.xyz', 'w') as outfile:
+                        for fname in filenames:
+                            with open(fname) as infile:
+                                outfile.write(infile.read())
+                            infile.close()
+                    outfile.close()
+
+# Formatting Files in B4
 
 for p in range(1,n+1):
     for q in range(p+1,n+1):
         for r in range(q+1,n+1):
             for s in range(r+1,n+1):
-                print('**')
-                file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(p) + '.xyz'
-                file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(q) + '.xyz'
-                file_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(r) + '.xyz'
-                file_4 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(s) + '.xyz'
+                file_1 = TEMP + str(p) + '.xyz'
+                file_2 = TEMP + str(q) + '.xyz'
+                file_3 = TEMP + str(r) + '.xyz'
+                file_4 = TEMP + str(s) + '.xyz'
                 filenames = [file_1, file_2, file_3, file_4]
                 name_4 = str(p) + str(q) + str(r) + str(s) + '.xyz'
                 f = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + name_4, 'r')
                 list_4 = f.readlines()
-                lines_in_4 = len(list_4)
+                lines_in_4 = len(list_4)            # total no. of atoms in tetramer
                 temp4_l = [lines_in_4]
                 f.close()
-                TEMP = '/home/csabu/PycharmProjects/clusters/PythonProjects/B4/temp4.xyz'
-                with open(TEMP, 'w') as file:
-                    for l in temp4_l:
-                        file.write("%i\n" % l)
-                        file.write('\n')
-                with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/temp4.xyz', 'a') as outfile:
+                TEMP_4 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B4/temp4.xyz'
+                with open(TEMP_4, 'w') as file:     # writing into a temporary file TEMP_4
+                    for l in temp4_l:               
+                        file.write("%i\n" % l)      # writing the tot. no. of atoms into 1st line
+                        file.write('\n')            # setting 2nd line blank
+                with open(TEMP_4, 'a') as outfile:
                     for fname in filenames:
                         with open(fname) as infile:
-                            outfile.write(infile.read())
+                            outfile.write(infile.read())       # appending the coordinates into TEMP_4
                         infile.close()
                 outfile.close()
-                os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + name_4)
-                os.rename('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/temp4.xyz','/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + name_4)
+                os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + name_4)    # removing the unformatted file
+                os.rename(TEMP_4,'/home/csabu/PycharmProjects/clusters/PythonProjects/B4/' + name_4)   # renaming the temporary file as original file
 
-# formatting TRIMERS
+# formatting files in B3
 
 for i in range (1,n+1):
     for j in range (i+1,n+1):
         for k in range (j+1,n+1):
-            print('**')
-            file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(i) + '.xyz'
-            file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(j) + '.xyz'
-            file_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(k) + '.xyz'
+            file_1 = TEMP + str(i) + '.xyz'
+            file_2 = TEMP + str(j) + '.xyz'
+            file_3 = TEMP + str(k) + '.xyz'
             filenames = [file_1, file_2, file_3]
             name_3 = str(i) + str(j) + str(k) + '.xyz'
             f = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + name_3, 'r')
             list_3 = f.readlines()
-            lines_in_3 = len(list_3)
+            lines_in_3 = len(list_3)         # total no. of atoms in trimer
             temp3_l = [lines_in_3]
-            TEMP = '/home/csabu/PycharmProjects/clusters/PythonProjects/B3/temp3.xyz'
-            with open(TEMP, 'w') as file:
-                for l in temp3_l:
-                    file.write("%i\n" % l)
-                    file.write('\n')
-            with open(TEMP, 'a') as outfile:
+            TEMP_3 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B3/temp3.xyz'
+            with open(TEMP_3, 'w') as file:  # writing into a temporary file TEMP_3
+                for l in temp3_l:   
+                    file.write("%i\n" % l)   # writing the tot. no. of atoms into 1st line
+                    file.write('\n')         # setting 2nd line blank
+            with open(TEMP_3, 'a') as outfile:
                 for fname in filenames:
                     with open(fname) as infile:
-                        outfile.write(infile.read())
+                        outfile.write(infile.read())       # appending coordinates into TEMP_3
                     infile.close()
             outfile.close()
-            os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + name_3)
-            os.rename(TEMP ,'/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + name_3)
+            os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + name_3)   # removing original file
+            os.rename(TEMP_3 ,'/home/csabu/PycharmProjects/clusters/PythonProjects/B3/' + name_3)  # renaming TEMP_3
 
-# formatting dimers
+# formatting files in B2
 for p in range(1,n+1):
     for q in range(p+1,n+1):
-        print('**')
-        file_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(p)+'.xyz'
-        file_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + str(q)+'.xyz'
+        file_1 = TEMP + str(p)+'.xyz'
+        file_2 = TEMP + str(q)+'.xyz'
         filenames = [file_1, file_2]
         name_2 = str(p)+str(q)+'.xyz'
         f = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B2/' + name_2, 'r')
         list_2 = f.readlines()
-        lines_in_2 = len(list_2)
+        lines_in_2 = len(list_2)        # no. ofatoms in dimer
         temp2_l = [lines_in_2]
-        TEMP = '/home/csabu/PycharmProjects/clusters/PythonProjects/B2/temp2.xyz'
-        with open(TEMP, 'w') as file:
+        TEMP_2 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B2/temp2.xyz'
+        with open(TEMP_2, 'w') as file:    # writing into a temporary file TEMP_2
                 for l in temp2_l:
-                    file.write("%i\n" % l)
-                    file.write('\n')
+                    file.write("%i\n" % l)   # writng no.of atoms into 1st line
+                    file.write('\n')         # setting 2nd line blank
 
-        with open( TEMP , 'a') as outfile:
+        with open( TEMP_2, 'a') as outfile:
             for fname in filenames:
                 with open(fname) as infile:
-                    outfile.write(infile.read())
+                    outfile.write(infile.read())   # appending coordinates into TEMP_2
                 infile.close()
         outfile.close()
-        os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B2/' + name_2)
-        os.rename(TEMP, '/home/csabu/PycharmProjects/clusters/PythonProjects/B2/' + name_2)
+        os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B2/' + name_2)    #removing original file
+        os.rename(TEMP_2, '/home/csabu/PycharmProjects/clusters/PythonProjects/B2/' + name_2)  #renaming TEMP_2
 
-# formatting monomers
+# formatting files in B1
 for i in range(1,n+1):
-    print('**')
     name_1 = str(i) + '.xyz'
-    f = open('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name_1, 'r')
+    f = open(TEMP + name_1, 'r')
     list_1 = f.readlines()
-    lines_in_1 = len(list_1)
+    lines_in_1 = len(list_1)     # no. of atoms in monomer
     temp1_l = [lines_in_1]
-    TEMP = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/temp1.xyz'
-    with open(TEMP, 'w') as file:
+    TEMP_1 = '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/temp1.xyz'
+    with open(TEMP_1, 'w') as file:     # writing into a temporary file TEMP_1
         for l in temp1_l:
-            file.write("%i\n" % l)
+            file.write("%i\n" % l)      # writing tot.no. of atoms into 1st line
             file.write('\n')
 
-    with open(TEMP, 'a') as outfile:
+    with open(TEMP_1, 'a') as outfile:
             with open('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name_1, 'r') as infile:
-                outfile.write(infile.read())
+                outfile.write(infile.read())     # appending coordinates into TEMP_1
             infile.close()
     outfile.close()
-    os.remove('/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name_1)
-    os.rename(TEMP, '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name_1)
+    os.remove(TEMP + name_1)    # removing original unformatted file
+    os.rename(TEMP_1, '/home/csabu/PycharmProjects/clusters/PythonProjects/B1/' + name_1)   # renaming TEMP_1
+
