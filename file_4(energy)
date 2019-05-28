@@ -1,0 +1,54 @@
+n = 4
+result = 0
+# Energy calculation for dimers
+for p in range(1,n+1):
+    for q in range(p+1,n+1):
+        PATH = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/2b/'
+        NAME = str(p) + str(q) + '/ener.dat'
+        path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
+        name_1 = str(p) + '/ener.dat'
+        name_2 = str(q) + '/ener.dat'
+        f = open(PATH + NAME,'r')
+        g = open(path + name_1,'r')
+        h = open(path + name_2,'r')
+        result = float(f.readline()) - (float(g.readline()) + float(h.readline()))
+        #print(result)
+
+result = 0
+# Energy calculation for trimers
+for i in range(1, n + 1):
+    for j in range(i + 1, n + 1):
+        for k in range(j + 1, n + 1):
+            PATH = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/3b/'
+            NAME = str(i) + str(j) + str(k) + '/ener.dat'
+            path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
+            name_1 = str(i) + '/ener.dat'
+            name_2 = str(j) + '/ener.dat'
+            name_3 = str(k) + '/ener.dat'
+            f = open(PATH + NAME, 'r')
+            g = open(path + name_1, 'r')
+            h = open(path + name_2, 'r')
+            m = open(path + name_3, 'r')
+            result = float(f.readline()) - (float(g.readline()) + float(h.readline()) + float(m.readline()))
+            #print(result)
+
+result = 0
+# Energy calculation for tetramers
+for p in range(1, n + 1):
+    for q in range(p + 1, n + 1):
+        for r in range(q + 1, n + 1):
+            for s in range(r + 1, n + 1):
+                PATH = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/4b/'
+                NAME = str(p) + str(q) + str(r) + str(s) + '/ener.dat'
+                path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
+                name_1 = str(p) + '/ener.dat'
+                name_2 = str(q) + '/ener.dat'
+                name_3 = str(r) + '/ener.dat'
+                name_4 = str(s) + '/ener.dat'
+                f = open(PATH + NAME, 'r')
+                g = open(path + name_1, 'r')
+                h = open(path + name_2, 'r')
+                m = open(path + name_3, 'r')
+                t = open(path + name_4, 'r')
+                result = float(f.readline()) - (float(g.readline()) + float(h.readline()) + float(m.readline()) + float(t.readline()))
+                #print(result)
