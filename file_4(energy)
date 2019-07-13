@@ -1,54 +1,111 @@
-n = 4
+# TO CALCULATE FINAL RESULT
+n = 6
 result = 0
+sum = 0
+#Energy calculation for monomers
+print('MONOMERS : ')
+for i in range(1,n+1):
+    path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
+    name = str(i) + '/energy.dat'
+    f = open(path + name, 'r')
+    sum += float(f.readline())
+print(sum * 627.51)
+
 # Energy calculation for dimers
+result = 0
+sum = 0
+print('DIMERS : ')
 for p in range(1,n+1):
     for q in range(p+1,n+1):
         PATH = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/2b/'
-        NAME = str(p) + str(q) + '/ener.dat'
+        NAME = str(p) + str(q) + '/energy.dat'
         path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
-        name_1 = str(p) + '/ener.dat'
-        name_2 = str(q) + '/ener.dat'
+        name_1 = str(p) + '/energy.dat'
+        name_2 = str(q) + '/energy.dat'
         f = open(PATH + NAME,'r')
         g = open(path + name_1,'r')
         h = open(path + name_2,'r')
         result = float(f.readline()) - (float(g.readline()) + float(h.readline()))
-        #print(result)
+        result_1 = result * 627.51  # converting to kcal/mol
+        #print(p,q)
+        #print(result_1)
+        sum +=result_1
+        #print(sum)
+print(sum)
 
 result = 0
+sum = 0
 # Energy calculation for trimers
+print('TRIMER : ')
 for i in range(1, n + 1):
     for j in range(i + 1, n + 1):
         for k in range(j + 1, n + 1):
             PATH = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/3b/'
-            NAME = str(i) + str(j) + str(k) + '/ener.dat'
-            path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
-            name_1 = str(i) + '/ener.dat'
-            name_2 = str(j) + '/ener.dat'
-            name_3 = str(k) + '/ener.dat'
-            f = open(PATH + NAME, 'r')
-            g = open(path + name_1, 'r')
-            h = open(path + name_2, 'r')
-            m = open(path + name_3, 'r')
-            result = float(f.readline()) - (float(g.readline()) + float(h.readline()) + float(m.readline()))
-            #print(result)
+            NAME = str(i) + str(j) + str(k) + '/energy.dat'
+            path_1 = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
+            name_1 = str(i) + '/energy.dat'
+            name_2 = str(j) + '/energy.dat'
+            name_3 = str(k) + '/energy.dat'
+            path_2 = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/2b/'
+            name_4 = str(i) + str(j) + '/energy.dat'
+            name_5 = str(i) + str(k) + '/energy.dat'
+            name_6 = str(j) + str(k) + '/energy.dat'
+            H = open(PATH + NAME, 'r')
+            h_1 = open(path_1 + name_1, 'r')
+            h_2 = open(path_1 + name_2, 'r')
+            h_3 = open(path_1 + name_3, 'r')
+            h_4 = open(path_2 + name_4, 'r')
+            h_5 = open(path_2 + name_5, 'r')
+            h_6 = open(path_2 + name_6, 'r')
+            result = float(H.readline()) + (float(h_1.readline()) + float(h_2.readline()) + float(h_3.readline())) - (float(h_4.readline()) + float(h_5.readline()) + float(h_6.readline()))
+            result_1 = result * 627.51
+            sum += result_1
+print(sum)
 
 result = 0
+sum = 0
 # Energy calculation for tetramers
-for p in range(1, n + 1):
-    for q in range(p + 1, n + 1):
-        for r in range(q + 1, n + 1):
-            for s in range(r + 1, n + 1):
+print('TETRAMER')
+for i in range(1, n + 1):
+    for j in range(i + 1, n + 1):
+        for k in range(j + 1, n + 1):
+            for s in range(k + 1, n + 1):
                 PATH = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/4b/'
-                NAME = str(p) + str(q) + str(r) + str(s) + '/ener.dat'
-                path = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
-                name_1 = str(p) + '/ener.dat'
-                name_2 = str(q) + '/ener.dat'
-                name_3 = str(r) + '/ener.dat'
-                name_4 = str(s) + '/ener.dat'
-                f = open(PATH + NAME, 'r')
-                g = open(path + name_1, 'r')
-                h = open(path + name_2, 'r')
-                m = open(path + name_3, 'r')
-                t = open(path + name_4, 'r')
-                result = float(f.readline()) - (float(g.readline()) + float(h.readline()) + float(m.readline()) + float(t.readline()))
-                #print(result)
+                NAME = str(i) + str(j) + str(k) + str(s) + '/energy.dat'
+                path_1 = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/1b/'
+                name_1 = str(i) + '/energy.dat'
+                name_2 = str(j) + '/energy.dat'
+                name_3 = str(k) + '/energy.dat'
+                name_4 = str(s) + '/energy.dat'
+                G = open(PATH + NAME, 'r')
+                g_1 = open(path_1 + name_1, 'r')
+                g_2 = open(path_1 + name_2, 'r')
+                g_3 = open(path_1 + name_3, 'r')
+                g_4 = open(path_1 + name_4, 'r')
+                path_2 = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/2b/'
+                name_5 = str(i) + str(j) + '/energy.dat'
+                name_6 = str(i) + str(k) + '/energy.dat'
+                name_7 = str(i) + str(s) + '/energy.dat'
+                name_8 = str(j) + str(k) + '/energy.dat'
+                name_9 = str(j) + str(s) + '/energy.dat'
+                name_10 = str(k) + str(s) + '/energy.dat'
+                g_5 = open(path_2 + name_5, 'r')
+                g_6 = open(path_2 + name_6, 'r')
+                g_7 = open(path_2 + name_7, 'r')
+                g_8 = open(path_2 + name_8, 'r')
+                g_9 = open(path_2 + name_9, 'r')
+                g_10 = open(path_2 + name_10, 'r')
+                path_3 = '/home/csabu/PROJECT_IITKGP/Coordinates/energy/3b/'
+                name_11 = str(i) + str(j) + str(k) + '/energy.dat'
+                name_12 = str(i) + str(j) + str(s) + '/energy.dat'
+                name_13 = str(i) + str(k) + str(s) + '/energy.dat'
+                name_14 = str(j) + str(k) + str(s) + '/energy.dat'
+                g_11 = open(path_3 + name_11, 'r')
+                g_12 = open(path_3 + name_12, 'r')
+                g_13 = open(path_3 + name_13, 'r')
+                g_14 = open(path_3 + name_14, 'r')
+                result = float(G.readline()) - (float(g_1.readline()) + float(g_2.readline()) + float(g_3.readline()) + float(g_4.readline())) + (float(g_5.readline()) + float(g_6.readline()) + float(g_7.readline()) + float(g_8.readline()) + float(g_9.readline()) + float(g_10.readline())) - (float(g_11.readline()) + float(g_12.readline()) + float(g_13.readline()) + float(g_14.readline()))
+                result_1 = result * 627.51
+                sum += result_1
+print(sum)
+
