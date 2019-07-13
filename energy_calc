@@ -1,0 +1,13 @@
+# TO CALCULATE ENERGY USING PSI4
+import psi4
+psi4.core.set_output_file('output.dat', False)
+psi4.set_memory('500 MB')
+
+h2 = psi4.geometry("""
+0 1
+O                 -0.61663800   -1.01709300   -1.42595600 
+H                 -0.48199700   -1.68747900   -2.10024200 
+H                 -0.10522200   -1.33088600   -0.65758600 
+""")
+
+psi4.energy('scf/6-31g*',dft_functional='b3lyp')
